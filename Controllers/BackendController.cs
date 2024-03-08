@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Mvc;
 
@@ -79,9 +80,44 @@ namespace _8MarzoTest.Controllers
             return View();
         }
 
+        [HttpGet]
         public JsonResult PrenotazioniPensione()
         {
-            return View();
+            string connectionString = ConfigurationManager.ConnectionStrings["MyDb"].ConnectionString;
+            
+            try
+            {
+                int totale = 0;
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = @"SELECT COUNT(*) As TotalePrenotazioni FROM Prenotazione WHERE PensioneCompleta = 'True'";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            totale = reader.GetInt32(0);
+                            System.Diagnostics.Debug.WriteLine(totale);
+                            
+                        }
+                    }
+ 
+                }
+                return Json(totale, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public ActionResult PrenotazioniPensioneView()
+        {
+            var data = PrenotazioniPensione();
+
+            return View(data.Data);
         }
     }
 }

@@ -1,0 +1,26 @@
+﻿@model int
+
+<h2>Prenotazioni con pensione completa</h2>
+<div id="H4"></div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+        $.ajax({
+             url: '@Url.Action("PrenotazioniPensione", "Backend")',
+             type: 'GET',
+             dataType: 'json',
+            success: function (data) {
+                var text = $('<h4> Totale spedizioni: ' + data + '</h4>');
+                $('#H4').append(text);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });
+
+    </script>
+}
+
