@@ -32,7 +32,7 @@ namespace _8MarzoTest.Controllers
         }
 
         [HttpGet]
-        public JsonResult RicercaPrenotazione(string cf)
+        public JsonResult RicercaPrenotazione()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["MyDb"].ConnectionString;
             List<Prenotazione> lista = new List<Prenotazione>();
@@ -44,11 +44,12 @@ namespace _8MarzoTest.Controllers
                     string query = @"SELECT IdPrenotazione, Prenotazione.IdCliente, IdCamera, DataPrenotazione, Anno, Dal, Al, Caparra, Tariffa, PensioneCompleta, MezzaPensione, Pernottamento 
                                      FROM Prenotazione
                                      INNER JOIN Cliente ON Cliente.IdCliente = Prenotazione.IdCliente
-                                     WHERE Cliente.CF = @cf";
+                                     WHERE Cliente.CF = 'CHKBYJ00L25Z222B'";
+                    //non sono riuscito a passare il parametro CF
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@cf", cf);
+                        
                        
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
