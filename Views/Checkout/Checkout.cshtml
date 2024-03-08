@@ -1,0 +1,58 @@
+﻿@model  _8MarzoTest.Models.CheckoutView
+
+<h2>Checkout</h2>
+<h5>Info soggiorno</h5>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>CF</th>
+            <th>Numero Camera</th>
+            <th>Dal</th>
+            <th>Al</th>
+            <th>Tariffa</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Checkout1s)
+        {
+            <tr>
+                <td>@item.CF</td>
+                <td>@item.NumeroCamera</td>
+                <td>@item.Dal</td>
+                <td>@item.Al</td>
+                <td>@item.Tariffa euro</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h5>Servizi aggiuntivi</h5>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Colazione in camera</th>
+            <th>Minibar</th>
+            <th>Internet</th>
+            <th>Letto Extra</th>
+            <th>Culla</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Checkout2s)
+        {
+            <tr>
+                <td>@item.ColazioneInCamera</td>
+                <td>@item.MiniBar</td>
+                <td>@item.Internet</td>
+                <td>@item.LettoExtra</td>
+                <td>@item.Culla</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h5>Prezzo totale</h5>
+<p>@Model.Totale[0] euro</p>
+
+
+
+

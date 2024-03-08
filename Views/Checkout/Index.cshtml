@@ -1,0 +1,24 @@
+﻿<h2>Checkout</h2>
+<hr />
+
+@using (Html.BeginForm("Checkout", "Checkout", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("IdPrenotazione", "Id Prenotazione", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("IdPrenotazione", null, new { @class = "form-control" })
+                @Html.ValidationMessage("IdPrenotazione", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10 mt-3">
+                <input type="submit" value="Esegui Checkout" class="btn btn-dark" />
+            </div>
+        </div>
+    </div>
+}

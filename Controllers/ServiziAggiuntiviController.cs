@@ -17,7 +17,9 @@ namespace _8MarzoTest.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return View();
+                //per mandare valori default al form
+                var model = new ServiziAggiuntivi();
+                return View(model);
             }
             else
             {
@@ -63,7 +65,7 @@ namespace _8MarzoTest.Controllers
                         cmd.Parameters.AddWithValue("@Internet", servizi.Internet);
                         cmd.Parameters.AddWithValue("@InternetPrezzo", servizi.InternetPrezzo);
                         cmd.Parameters.AddWithValue("@InternetData", servizi.InternetData.Date == DateTime.MinValue ? (object)DBNull.Value : servizi.ColazioneInCameraData.Date);
-                        cmd.Parameters.AddWithValue("@InternetQuantita", servizi.InternetQuantita);
+                        cmd.Parameters.AddWithValue("@InternetQuantita", 1);
                         cmd.Parameters.AddWithValue("@LettoExtra", servizi.LettoExtra);
                         cmd.Parameters.AddWithValue("@LettoExtraPrezzo", servizi.LettoExtraPrezzo);
                         cmd.Parameters.AddWithValue("@LettoExtraData", servizi.LettoExtraData.Date == DateTime.MinValue ? (object)DBNull.Value : servizi.ColazioneInCameraData.Date);
@@ -80,7 +82,8 @@ namespace _8MarzoTest.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                Response.Write(ex);
+                return View("Index");
             }
             finally
             {
