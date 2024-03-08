@@ -1,0 +1,86 @@
+﻿@model IEnumerable<_8MarzoTest.Models.Prenotazione>
+
+<h2>Ricerca Prenotazione</h2>
+
+@section Scripts {
+    <script type="text/javascript">
+     function formatDate(jsonDate) {
+         var date = new Date(parseInt(jsonDate.substr(6)));
+         return date.toLocaleDateString();
+     }
+
+    $(document).ready(function () {
+        $.ajax({
+             url: '@Url.Action("RicercaPrenotazione", "Backend")',
+             type: 'GET',
+             dataType: 'json',
+            success: function (data) {
+                $.each(data, function (index, item) {
+                    var row = '<tr>' +
+                              '<td>' + item.IdPrenotazione + '</td>' +
+                              '<td>' + item.IdCliente + '</td>' +
+                              '<td>' + item.IdCamera + '</td>' +
+                              '<td>' + formatDate(item.DataPrenotazione) + '</td>' +
+                              '<td>' + item.Anno + '</td>' +
+                              '<td>' + formatDate(item.Dal) + '</td>' +
+                              '<td>' + formatDate(item.Al) + '</td>' +
+                              '<td>' + item.Caparra + '</td>' +
+                              '<td>' + item.Tariffa + '</td>' +
+                              '<td>' + item.PensioneCompleta + '</td>' +
+                              '<td>' + item.MezzaPensione + '</td>' +
+                              '<td>' + item.Pernottamento + '</td>' +
+                              '</tr>';
+
+                    $('#tabella').append(row);
+                });
+             },
+             error: function (error) {
+                  console.log(error);
+             }
+           });
+    });
+    </script>
+}
+
+<table class="table" id="tabella">
+    <tr>
+<th>
+            @Html.DisplayNameFor(model => model.IdPrenotazione)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdCamera)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataPrenotazione)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Anno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Al)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Caparra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tariffa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PensioneCompleta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MezzaPensione)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pernottamento)
+        </th>
+        
+    </tr>
+
+</table>

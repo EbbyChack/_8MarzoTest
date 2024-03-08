@@ -20,15 +20,15 @@ namespace _8MarzoTest.Controllers
         [HttpGet] 
         public ActionResult Checkout(int IdPrenotazione)
         {
+
+         
+
             string connectionString = ConfigurationManager.ConnectionStrings["MyDb"].ConnectionString;
             //creo una lista di oggetti per inserire dentro altre liste
             CheckoutView lists = new CheckoutView();
             lists.Checkout1s = new List<Checkout1>();
             lists.Checkout2s = new List<ServiziAggiuntivi>();
             lists.Totale = new List<double>();
-
-
-
 
             //creo una lista di oggetti per inserire i dati 
 
