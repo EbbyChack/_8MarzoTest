@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "RicercaPrenotazioneForm";
+}
+
+<h2>Cerca Prenotazione </h2>
+
+@using (Html.BeginForm("RicercaPrenotazione", "Backend", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("CF", "Codice Fiscale", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("CF", null, new { @class = "form-control" })
+                @Html.ValidationMessage("CF", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10 mt-3">
+                <input type="submit" value="Cerca" class="btn btn-dark" />
+            </div>
+        </div>
+    </div>
+}
+
+
